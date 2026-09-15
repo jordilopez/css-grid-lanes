@@ -29,11 +29,16 @@ describe('fetchDogImages', () => {
       'https://images.dog.ceo/breeds/hound/n01.jpg',
       'https://images.dog.ceo/breeds/pug/n02.jpg',
     ]);
-    expect(fetch).toHaveBeenCalledWith('https://dog.ceo/api/breeds/image/random/2');
+    expect(fetch).toHaveBeenCalledWith(
+      'https://dog.ceo/api/breeds/image/random/2',
+    );
   });
 
   it('falls back to placeholder cards when the api request fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network down')));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockRejectedValue(new Error('network down')),
+    );
 
     const images = await fetchDogImages(3);
 
@@ -61,7 +66,11 @@ describe('fetchDogImages', () => {
       'fetch',
       vi.fn().mockResolvedValue({
         ok: true,
-        json: () => Promise.resolve({ status: 'success', message: ['https://images.dog.ceo/only-one.jpg'] }),
+        json: () =>
+          Promise.resolve({
+            status: 'success',
+            message: ['https://images.dog.ceo/only-one.jpg'],
+          }),
       }),
     );
 

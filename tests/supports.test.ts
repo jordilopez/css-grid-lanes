@@ -11,8 +11,10 @@ describe('shouldShowUnsupportedNotice', () => {
   });
 
   it('returns true when CSS.supports is unavailable', () => {
-    expect(shouldShowUnsupportedNotice(() => {
-      throw new TypeError('CSS.supports is not a function');
-    })).toBe(true);
+    expect(
+      shouldShowUnsupportedNotice(() => {
+        throw new TypeError('CSS.supports is not a function');
+      }),
+    ).toBe(true);
   });
 });
