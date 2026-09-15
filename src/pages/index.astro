@@ -1,15 +1,12 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { fetchDogImages } from '../lib/dogs';
 
 const images = await fetchDogImages(6);
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CSS Grid Lanes Demo</title>
-  </head>
-  <body>
-    <h1>CSS Grid Lanes Demo</h1>
-    <p>placeholder scaffold — {images.length} images fetched</p>
-  </body>
-</html>
+<BaseLayout title="CSS Grid Lanes Demo">
+  <section>
+    <h2 class="example__title">Scaffold</h2>
+    <p>{images.length} dog images fetched for the upcoming examples.</p>
+  </section>
+</BaseLayout>

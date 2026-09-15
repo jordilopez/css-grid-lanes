@@ -1,0 +1,68 @@
+---
+import 'css-starter';
+import '../styles/demo.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'A demo of the CSS Grid Lanes feature, only supported in Safari today.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <script is:inline>
+      (function () {
+        try {
+          var supported = CSS.supports('display', 'grid-lanes');
+          document.documentElement.dataset.gridLanes = supported ? 'supported' : 'unsupported';
+        } catch (e) {
+          document.documentElement.dataset.gridLanes = 'unsupported';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="site-header__tag">CSS Grid Level 3</p>
+      <h1 class="site-header__title">{title}</h1>
+      <p class="site-header__desc">{description}</p>
+    </header>
+
+    <div id="lanes-notice" class="lanes-notice" hidden>
+      <strong>⚠️ Safari only.</strong> CSS Grid Lanes
+      (<code>display: grid-lanes</code>) is currently only supported in
+      <a href="https://caniuse.com/css-grid-lanes">Safari 26.2+ and Safari Technology Preview</a>.
+      You're seeing a fallback layout — open this page in Safari to see the real thing.
+    </div>
+
+    <main class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://caniuse.com/css-grid-lanes">caniuse: css-grid-lanes</a></li>
+        <li><a href="https://webkit.org/blog/17660/introducing-css-grid-lanes/">Introducing CSS Grid Lanes — WebKit Blog</a></li>
+        <li><a href="https://gridlanes.webkit.org/">Grid Lanes interactive demo — WebKit</a></li>
+        <li><a href="https://www.w3.org/TR/css-grid-3/">CSS Grid Layout Module Level 3 — W3C</a></li>
+        <li><a href="https://dog.ceo/dog-api/">Photos from the dog.ceo API</a></li>
+      </ul>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var notice = document.getElementById('lanes-notice');
+        if (notice && document.documentElement.dataset.gridLanes === 'unsupported') {
+          notice.hidden = false;
+        }
+      })();
+    </script>
+  </body>
+</html>
