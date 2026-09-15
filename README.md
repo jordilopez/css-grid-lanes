@@ -9,12 +9,17 @@ browsers, which render a multi-column fallback instead.
 
 ## Examples
 
-1. Basic waterfall gallery — `grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))`
-2. Varying lane sizes — mixed `minmax()` tracks
+A single set of dog cards is reused across all six layout examples — pick one
+from the pill selector on the page and the gallery, description, and CSS
+snippet update together. The switching is pure CSS (native radios + `:has()`),
+no JavaScript:
+
+1. Waterfall — `grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))`
+2. Varied lane sizes — mixed `minmax()` tracks
 3. Spanning items — `grid-column: span N`
 4. Explicit placement — `grid-column: -3 / -1`
 5. Brick layout — lanes via `grid-template-rows`
-6. Flow tolerance — `flow-tolerance: 0` vs `20em`
+6. Flow tolerance — `flow-tolerance: 15em` vs the default `1em`
 
 Dog photos come from the [dog.ceo API](https://dog.ceo/dog-api/), fetched at
 build time (placeholder cards are used if the API is unreachable).

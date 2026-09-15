@@ -1,73 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WaterfallGallery from '../components/WaterfallGallery.astro';
-import VariedLanes from '../components/VariedLanes.astro';
-import SpanningCards from '../components/SpanningCards.astro';
-import PlacedItems from '../components/PlacedItems.astro';
-import BrickLayout from '../components/BrickLayout.astro';
-import FlowTolerance from '../components/FlowTolerance.astro';
+import Gallery from '../components/Gallery.astro';
+import { EXAMPLES } from '../lib/examples';
 ---
 <BaseLayout title="CSS Grid Lanes Demo">
-  <section>
-    <h2 class="example__title">1. Basic waterfall gallery</h2>
-    <p class="example__desc">
-      The classic masonry layout in three lines of CSS. Each card flows into
-      whichever lane gets it closest to the top — like cars in bumper-to-bumper
-      traffic, always changing lanes to stay furthest ahead.
-    </p>
-    <p><code class="example__code">display: grid-lanes; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;</code></p>
-    <WaterfallGallery />
-  </section>
+  <section class="playground">
+    <fieldset class="picker">
+      <legend class="sr-only">Choose a layout example</legend>
+      {EXAMPLES.map((ex, i) => (
+        <label class="picker__option" for={`ex-${ex.id}`}>
+          <input
+            type="radio"
+            name="example"
+            id={`ex-${ex.id}`}
+            value={ex.id}
+            checked={i === 0}
+          />
+          <span>{ex.label}</span>
+        </label>
+      ))}
+    </fieldset>
 
-  <section>
-    <h2 class="example__title">2. Varying lane sizes</h2>
-    <p class="example__desc">
-      Because lanes are defined with the full power of <code>grid-template-columns</code>,
-      you can mix narrow and wide lanes — and keep the first and last lanes narrow
-      no matter how many lanes the viewport creates.
-    </p>
-    <p><code class="example__code">grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr)) minmax(8rem, 1fr);</code></p>
-    <VariedLanes />
-  </section>
+    {EXAMPLES.map((ex, i) => (
+      <div class:list={['ex-meta', `ex-meta--${ex.id}`]} hidden={i !== 0}>
+        <h2 class="example__title">{i + 1}. {ex.title}</h2>
+        <p class="example__desc">{ex.description}</p>
+        <pre class="example__pre"><code>{ex.code}</code></pre>
+      </div>
+    ))}
 
-  <section>
-    <h2 class="example__title">3. Spanning items</h2>
-    <p class="example__desc">
-      Items can span multiple lanes with <code>grid-column: span N</code>, enabling
-      asymmetric editorial designs — a lead story across four lanes, teasers across two.
-    </p>
-    <p><code class="example__code">article {'{'} grid-column: span 2; {'}'} article:first-child {'{'} grid-column: span 4; {'}'}</code></p>
-    <SpanningCards />
-  </section>
-
-  <section>
-    <h2 class="example__title">4. Explicit placement</h2>
-    <p class="example__desc">
-      You can still place items explicitly. This header is pinned to the last two
-      lanes — whatever their total number is.
-    </p>
-    <p><code class="example__code">header {'{'} grid-column: -3 / -1; {'}'}</code></p>
-    <PlacedItems />
-  </section>
-
-  <section>
-    <h2 class="example__title">5. Brick layout — lanes in the other direction</h2>
-    <p class="example__desc">
-      Define lanes with <code>grid-template-rows</code> instead, and items flow
-      left-to-right in a "brick" layout rather than top-to-bottom.
-    </p>
-    <p><code class="example__code">display: grid-lanes; grid-template-rows: 1fr 1fr 1fr;</code></p>
-    <BrickLayout />
-  </section>
-
-  <section>
-    <h2 class="example__title">6. Flow tolerance</h2>
-    <p class="example__desc">
-      <code>flow-tolerance</code> controls how picky the placement algorithm is.
-      At <code>0</code>, items chase every tiny height advantage; at a high value,
-      items keep their reading order and only change lanes for a real difference.
-      The default is <code>1em</code>.
-    </p>
-    <FlowTolerance />
+    <Gallery count={15} />
   </section>
 </BaseLayout>

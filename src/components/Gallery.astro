@@ -5,7 +5,7 @@ interface Props {
   count?: number;
 }
 
-const { count = 12 } = Astro.props;
+const { count = 15 } = Astro.props;
 const images = await fetchDogImages(count);
 const breeds = images.map((url) => {
   if (url.startsWith('placeholder:')) return 'placeholder pup';
@@ -13,24 +13,15 @@ const breeds = images.map((url) => {
   return parts ? parts[0].replace(/-/g, ' ') : 'doggo';
 });
 ---
-<div class="lanes lanes--waterfall">
+<div class="lanes">
   {images.map((url, i) => (
-    <figure class="card">
+    <figure class:list={['card', { 'card--hero': i === 0, 'card--wide': i > 0 && i < 8 }]}>
       {url.startsWith('placeholder:') ? (
         <div class="card--placeholder">🐾 {breeds[i]}</div>
       ) : (
-        <img src={url} alt={`A ${breeds[i]}`} loading="lazy" />
+        <img src={url} alt={`A ${breeds[i]}`} loading={i > 3 ? 'lazy' : 'eager'} />
       )}
       <figcaption class="card__caption">#{i + 1} — {breeds[i]}</figcaption>
     </figure>
   ))}
 </div>
-
-<style>
-  /* Waterfall: lanes defined via grid-template-columns. */
-  .lanes--waterfall {
-    display: grid-lanes;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
-  }
-</style>

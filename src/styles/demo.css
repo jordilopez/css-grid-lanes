@@ -76,6 +76,171 @@ body {
   margin: 0 0 var(--sp-4, 1.5rem);
 }
 
+.example__pre {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-sm);
+  background: var(--c-bg-subtle);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--br-md, 8px);
+  padding: var(--sp-3, 1rem) var(--sp-4, 1.5rem);
+  margin: 0 0 var(--sp-4, 1.5rem);
+  overflow-x: auto;
+  line-height: var(--lh-base);
+}
+
+/* --- visually hidden (for legends / labels) --- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- example picker (segmented control of native radios) --- */
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--sp-4, 1.5rem);
+}
+
+.picker__option {
+  cursor: pointer;
+}
+
+.picker__option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.picker__option span {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-text-secondary);
+  background: var(--c-bg);
+  transition:
+    color 0.15s var(--ease-out, ease),
+    background 0.15s var(--ease-out, ease);
+}
+
+.picker__option:hover span {
+  border-color: var(--c-primary);
+  color: var(--c-text);
+}
+
+.picker__option:has(input:checked) span {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: var(--c-text-inverse);
+}
+
+.picker__option:has(input:focus-visible) span {
+  outline: 2px solid var(--c-focus-ring);
+  outline-offset: 2px;
+}
+
+/* --- per-example title / description / code: only the selected one shows --- */
+
+.ex-meta {
+  display: none;
+}
+
+body:has(#ex-waterfall:checked) .ex-meta--waterfall {
+  display: block;
+}
+body:has(#ex-varied:checked) .ex-meta--varied {
+  display: block;
+}
+body:has(#ex-spanning:checked) .ex-meta--spanning {
+  display: block;
+}
+body:has(#ex-placement:checked) .ex-meta--placement {
+  display: block;
+}
+body:has(#ex-brick:checked) .ex-meta--brick {
+  display: block;
+}
+body:has(#ex-tolerance:checked) .ex-meta--tolerance {
+  display: block;
+}
+
+/* --- layout variants, driven by the picker via :has() --- */
+
+/* 1. Waterfall — default selection */
+body:has(#ex-waterfall:checked) .lanes {
+  display: grid-lanes;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+/* 2. Varying lane sizes — narrow lanes stay at both edges */
+body:has(#ex-varied:checked) .lanes {
+  display: grid-lanes;
+  grid-template-columns:
+    repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr))
+    minmax(8rem, 1fr);
+  gap: 1rem;
+}
+
+/* 3. Spanning items — hero spans 4 lanes, teasers span 2 */
+body:has(#ex-spanning:checked) .lanes {
+  display: grid-lanes;
+  grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
+  gap: 1.5rem;
+}
+body:has(#ex-spanning:checked) .lanes .card {
+  grid-column: span 1;
+}
+body:has(#ex-spanning:checked) .card--wide {
+  grid-column: span 2;
+}
+body:has(#ex-spanning:checked) .card--hero {
+  grid-column: span 4;
+}
+
+/* 4. Explicit placement — first card pinned to the last two lanes */
+body:has(#ex-placement:checked) .lanes {
+  display: grid-lanes;
+  grid-template-columns: repeat(auto-fill, minmax(24ch, 1fr));
+  gap: 1rem;
+}
+body:has(#ex-placement:checked) .card--hero {
+  grid-column: -3 / -1;
+  background: var(--c-primary);
+}
+body:has(#ex-placement:checked) .card--hero .card__caption {
+  color: var(--c-text-inverse);
+}
+
+/* 5. Brick layout — lanes defined with grid-template-rows */
+body:has(#ex-brick:checked) .lanes {
+  display: grid-lanes;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+/* 6. Flow tolerance — high value keeps reading order */
+body:has(#ex-tolerance:checked) .lanes {
+  display: grid-lanes;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  flow-tolerance: 15em;
+}
+
 /* --- dog cards --- */
 
 .card {
@@ -135,4 +300,5 @@ body {
   .lanes > * {
     margin-block-end: 1rem;
   }
+  /* spanning/placement have no meaning in the fallback */
 }
