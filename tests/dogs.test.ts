@@ -29,7 +29,7 @@ describe('fetchDogImages', () => {
       'https://images.dog.ceo/breeds/hound/n01.jpg',
       'https://images.dog.ceo/breeds/pug/n02.jpg',
     ]);
-    expect(fetch).toHaveBeenCalledWith('https://dog.ceo/api/images/random/2');
+    expect(fetch).toHaveBeenCalledWith('https://dog.ceo/api/breeds/image/random/2');
   });
 
   it('falls back to placeholder cards when the api request fails', async () => {
