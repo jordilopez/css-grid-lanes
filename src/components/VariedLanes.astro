@@ -1,0 +1,34 @@
+---
+import { fetchDogImages } from '../lib/dogs';
+
+interface Props {
+  count?: number;
+}
+
+const { count = 14 } = Astro.props;
+const images = await fetchDogImages(count);
+---
+<div class="lanes lanes--varied">
+  {images.map((url, i) => (
+    <figure class="card">
+      {url.startsWith('placeholder:') ? (
+        <div class="card--placeholder">🐾</div>
+      ) : (
+        <img src={url} alt={`Dog ${i + 1}`} loading="lazy" />
+      )}
+      <figcaption class="card__caption">#{i + 1}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  /* Varying lane sizes: alternating narrow and wide lanes,
+     with narrow lanes always at both edges. */
+  .lanes--varied {
+    display: grid-lanes;
+    grid-template-columns:
+      repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr))
+      minmax(8rem, 1fr);
+    gap: 1rem;
+  }
+</style>

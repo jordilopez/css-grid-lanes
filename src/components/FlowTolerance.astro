@@ -1,0 +1,49 @@
+---
+import { fetchDogImages } from '../lib/dogs';
+
+const images = await fetchDogImages(7);
+const cards = images.map((url, i) => ({ url, i }));
+---
+<div class="tolerance-demo">
+  <div class="tolerance-side">
+    <p><code class="example__code">flow-tolerance: 0</code></p>
+    <div class="lanes lanes--tolerant-zero">
+      {cards.map(({ url, i }) => (
+        <figure class="card">
+          {url.startsWith('placeholder:') ? <div class="card--placeholder">🐾</div> : <img src={url} alt={`Dog ${i + 1}`} loading="lazy" />}
+          <figcaption class="card__caption">#{i + 1}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+  <div class="tolerance-side">
+    <p><code class="example__code">flow-tolerance: 20em</code></p>
+    <div class="lanes lanes--tolerant-high">
+      {cards.map(({ url, i }) => (
+        <figure class="card">
+          {url.startsWith('placeholder:') ? <div class="card--placeholder">🐾</div> : <img src={url} alt={`Dog ${i + 1}`} loading="lazy" />}
+          <figcaption class="card__caption">#{i + 1}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Flow tolerance: how picky the algorithm is when deciding where
+     the next item goes. Default is 1em. */
+  .lanes--tolerant-zero,
+  .lanes--tolerant-high {
+    display: grid-lanes;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+  .lanes--tolerant-zero { flow-tolerance: 0; }
+  .lanes--tolerant-high { flow-tolerance: 20em; }
+  .tolerance-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--sp-4, 1.5rem);
+  }
+  .tolerance-side p { margin-top: 0; }
+</style>
