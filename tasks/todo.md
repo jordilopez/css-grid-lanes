@@ -7,10 +7,10 @@ Plan: `tasks/plan.md`
 
 ## Phase 2: Page shell & core demo
 - [x] Task 2: Base layout, header, disclaimer banner, fallback styles
-- [ ] Task 3: Hero + Example 1 (basic waterfall gallery with dog cards)
+- [x] Task 3: Hero + Example 1 (basic waterfall gallery with dog cards)
 
 ## Checkpoint: Core demo works
-- [ ] Build passes; waterfall gallery renders in Safari TP with fallback elsewhere
+- [x] Build passes; waterfall gallery renders in Safari TP with fallback elsewhere
 
 ## Phase 3: Advanced examples
 - [ ] Task 4: Examples 2–6 (varying lanes, spanning, placement, brick, flow-tolerance)
