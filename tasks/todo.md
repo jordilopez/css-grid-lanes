@@ -6,7 +6,7 @@ Plan: `tasks/plan.md`
 - [x] Task 1: Scaffold Astro project with css-starter and dog.ceo utilities
 
 ## Phase 2: Page shell & core demo
-- [ ] Task 2: Base layout, header, disclaimer banner, fallback styles
+- [x] Task 2: Base layout, header, disclaimer banner, fallback styles
 - [ ] Task 3: Hero + Example 1 (basic waterfall gallery with dog cards)
 
 ## Checkpoint: Core demo works
