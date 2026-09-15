@@ -1,0 +1,36 @@
+---
+import { fetchDogImages } from '../lib/dogs';
+
+interface Props {
+  count?: number;
+}
+
+const { count = 12 } = Astro.props;
+const images = await fetchDogImages(count);
+const breeds = images.map((url) => {
+  if (url.startsWith('placeholder:')) return 'placeholder pup';
+  const parts = url.split('/breeds/')[1]?.split('/');
+  return parts ? parts[0].replace(/-/g, ' ') : 'doggo';
+});
+---
+<div class="lanes lanes--waterfall">
+  {images.map((url, i) => (
+    <figure class="card">
+      {url.startsWith('placeholder:') ? (
+        <div class="card--placeholder">🐾 {breeds[i]}</div>
+      ) : (
+        <img src={url} alt={`A ${breeds[i]}`} loading="lazy" />
+      )}
+      <figcaption class="card__caption">#{i + 1} — {breeds[i]}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  /* Waterfall: lanes defined via grid-template-columns. */
+  .lanes--waterfall {
+    display: grid-lanes;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+</style>

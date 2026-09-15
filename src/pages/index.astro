@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { fetchDogImages } from '../lib/dogs';
-
-const images = await fetchDogImages(6);
+import WaterfallGallery from '../components/WaterfallGallery.astro';
 ---
 <BaseLayout title="CSS Grid Lanes Demo">
   <section>
-    <h2 class="example__title">Scaffold</h2>
-    <p>{images.length} dog images fetched for the upcoming examples.</p>
+    <h2 class="example__title">1. Basic waterfall gallery</h2>
+    <p class="example__desc">
+      The classic masonry layout in three lines of CSS. Each card flows into
+      whichever lane gets it closest to the top — like cars in bumper-to-bumper
+      traffic, always changing lanes to stay furthest ahead.
+    </p>
+    <p><code class="example__code">display: grid-lanes; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;</code></p>
+    <WaterfallGallery />
   </section>
 </BaseLayout>
