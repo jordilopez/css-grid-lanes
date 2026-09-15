@@ -3,7 +3,7 @@
 Plan: `tasks/plan.md`
 
 ## Phase 1: Foundation
-- [ ] Task 1: Scaffold Astro project with css-starter and dog.ceo utilities
+- [x] Task 1: Scaffold Astro project with css-starter and dog.ceo utilities
 
 ## Phase 2: Page shell & core demo
 - [ ] Task 2: Base layout, header, disclaimer banner, fallback styles
