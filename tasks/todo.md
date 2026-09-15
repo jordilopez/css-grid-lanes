@@ -13,7 +13,7 @@ Plan: `tasks/plan.md`
 - [x] Build passes; waterfall gallery renders in Safari TP with fallback elsewhere
 
 ## Phase 3: Advanced examples
-- [ ] Task 4: Examples 2–6 (varying lanes, spanning, placement, brick, flow-tolerance)
+- [x] Task 4: Examples 2–6 (varying lanes, spanning, placement, brick, flow-tolerance)
 
 ## Phase 4: Polish
 - [ ] Task 5: Resources/footer, accessibility pass, build verification
