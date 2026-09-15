@@ -16,9 +16,9 @@ Plan: `tasks/plan.md`
 - [x] Task 4: Examples 2–6 (varying lanes, spanning, placement, brick, flow-tolerance)
 
 ## Phase 4: Polish
-- [ ] Task 5: Resources/footer, accessibility pass, build verification
+- [x] Task 5: Resources/footer, accessibility pass, build verification
 
 ## Checkpoint: Complete
-- [ ] `npm run build` succeeds
-- [ ] All six examples render correctly in Safari TP, fallback elsewhere
-- [ ] README updated
+- [x] `npm run build` succeeds
+- [x] All six examples render correctly in Safari TP, fallback elsewhere
+- [x] README updated
