@@ -1,25 +1,36 @@
 # css-grid-lanes
 
-Demo for CSS Grid Lanes feature
+Demo for the **CSS Grid Lanes** feature (`display: grid-lanes`, CSS Grid Layout
+Module Level 3) — currently supported only in **Safari 26.2+ and Safari
+Technology Preview 234+** (see [caniuse](https://caniuse.com/css-grid-lanes)).
 
-## Installation
+The page feature-detects support and shows a disclaimer in unsupported
+browsers, which render a multi-column fallback instead.
 
-Install the project dependencies appropriate for your selected tools.
+## Examples
+
+1. Basic waterfall gallery — `grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))`
+2. Varying lane sizes — mixed `minmax()` tracks
+3. Spanning items — `grid-column: span N`
+4. Explicit placement — `grid-column: -3 / -1`
+5. Brick layout — lanes via `grid-template-rows`
+6. Flow tolerance — `flow-tolerance: 0` vs `20em`
+
+Dog photos come from the [dog.ceo API](https://dog.ceo/dog-api/), fetched at
+build time (placeholder cards are used if the API is unreachable).
 
 ## Usage
 
-Add project-specific usage instructions here.
+```sh
+npm install
+npm run dev       # dev server
+npm run build     # static build into dist/
+npm run preview   # preview the built site
+npm test          # vitest unit tests (dog.ceo client, feature detection)
+```
 
 ## Development
 
-Selected initialization modules:
-- Git
-- npm
-- .nvmrc
-- Environment
-- Prettier
-- ESLint
-- EditorConfig
-- README
-- AGENTS
-- TypeScript
+Styling builds on [css-starter](https://github.com/jordilopez/css-starter)
+(via a git dependency at tag `v0.2.1`); demo styles in `src/styles/demo.css`
+are unlayered and override the `css-starter.*` cascade layers by design.

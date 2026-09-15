@@ -106,7 +106,11 @@ body {
   place-items: center;
   color: var(--c-text-muted);
   font-family: var(--ff-mono);
-  background: linear-gradient(135deg, var(--c-primary-subtle), var(--c-bg-muted));
+  background: linear-gradient(
+    135deg,
+    var(--c-primary-subtle),
+    var(--c-bg-muted)
+  );
 }
 
 /* --- footer --- */

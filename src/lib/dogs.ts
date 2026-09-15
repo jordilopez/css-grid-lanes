@@ -9,8 +9,13 @@ export async function fetchDogImages(count: number): Promise<string[]> {
   const images: string[] = [];
 
   try {
-    const response = await fetch(`https://dog.ceo/api/breeds/image/random/${count}`);
-    const data = (await response.json()) as { status: string; message: string | string[] };
+    const response = await fetch(
+      `https://dog.ceo/api/breeds/image/random/${count}`,
+    );
+    const data = (await response.json()) as {
+      status: string;
+      message: string | string[];
+    };
 
     if (data.status === 'success' && Array.isArray(data.message)) {
       images.push(...data.message);
