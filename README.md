@@ -36,6 +36,10 @@ npm test          # vitest unit tests (dog.ceo client, feature detection)
 
 ## Development
 
-Styling builds on [css-starter](https://github.com/jordilopez/css-starter)
-(via a git dependency at tag `v0.2.1`); demo styles in `src/styles/demo.css`
-are unlayered and override the `css-starter.*` cascade layers by design.
+Styling builds on [css-starter](https://github.com/jordilopez/css-starter),
+including its `.card` and `.picker` components (added in v0.3.0). During
+development the dependency points at the local clone
+(`file:../../sandboxes/css-starter`); once `v0.3.0` is pushed to GitHub it
+can be switched to `github:jordilopez/css-starter#v0.3.0`. Demo styles in
+`src/styles/demo.css` are unlayered and override the `css-starter.*`
+cascade layers by design.

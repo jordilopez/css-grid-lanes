@@ -88,69 +88,10 @@ body {
   line-height: var(--lh-base);
 }
 
-/* --- visually hidden (for legends / labels) --- */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* --- example picker (segmented control of native radios) --- */
+/* --- example picker: page-level spacing only; pills come from css-starter --- */
 
 .picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  border: 0;
-  padding: 0;
-  margin: 0 0 var(--sp-4, 1.5rem);
-}
-
-.picker__option {
-  cursor: pointer;
-}
-
-.picker__option input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.picker__option span {
-  display: inline-block;
-  padding: 0.375rem 0.875rem;
-  border: 1px solid var(--c-border);
-  border-radius: 999px;
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
-  color: var(--c-text-secondary);
-  background: var(--c-bg);
-  transition:
-    color 0.15s var(--ease-out, ease),
-    background 0.15s var(--ease-out, ease);
-}
-
-.picker__option:hover span {
-  border-color: var(--c-primary);
-  color: var(--c-text);
-}
-
-.picker__option:has(input:checked) span {
-  background: var(--c-primary);
-  border-color: var(--c-primary);
-  color: var(--c-text-inverse);
-}
-
-.picker__option:has(input:focus-visible) span {
-  outline: 2px solid var(--c-focus-ring);
-  outline-offset: 2px;
+  margin-block-end: var(--sp-4, 1.5rem);
 }
 
 /* --- per-example title / description / code: only the selected one shows --- */
@@ -241,29 +182,8 @@ body:has(#ex-tolerance:checked) .lanes {
   flow-tolerance: 15em;
 }
 
-/* --- dog cards --- */
-
-.card {
-  border: 1px solid var(--c-border);
-  border-radius: var(--br-md, 8px);
-  background: var(--c-bg);
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.06));
-  overflow: hidden;
-  margin: 0;
-  break-inside: avoid;
-}
-
-.card img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.card__caption {
-  padding: var(--sp-2, 0.5rem) var(--sp-3, 1rem);
-  font-size: var(--fs-sm);
-  color: var(--c-text-secondary);
-}
+/* --- dog cards: card surface comes from css-starter (.card / .card__caption);
+   only the demo-specific placeholder variant lives here --- */
 
 .card--placeholder {
   min-height: 12rem;
