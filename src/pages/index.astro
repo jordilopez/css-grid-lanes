@@ -1,0 +1,15 @@
+---
+import { fetchDogImages } from '../lib/dogs';
+
+const images = await fetchDogImages(6);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS Grid Lanes Demo</title>
+  </head>
+  <body>
+    <h1>CSS Grid Lanes Demo</h1>
+    <p>placeholder scaffold — {images.length} images fetched</p>
+  </body>
+</html>

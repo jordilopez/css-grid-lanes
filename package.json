@@ -3,5 +3,19 @@
   "version": "0.1.0",
   "description": "Demo for CSS Grid Lanes feature",
   "license": "MIT",
-  "author": ""
+  "author": "",
+  "dependencies": {
+    "astro": "^7.3.2",
+    "css-starter": "github:jordilopez/css-starter#v0.2.1"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.1"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run"
+  },
+  "type": "module"
 }
