@@ -7,6 +7,8 @@ Technology Preview 234+** (see [caniuse](https://caniuse.com/css-grid-lanes)).
 The page feature-detects support and shows a disclaimer in unsupported
 browsers, which render a multi-column fallback instead.
 
+**Live demo:** https://jordilopez.github.io/css-grid-lanes/
+
 ## Examples
 
 A single set of dog cards is reused across all six layout examples — pick one
@@ -34,12 +36,21 @@ npm run preview   # preview the built site
 npm test          # vitest unit tests (dog.ceo client, feature detection)
 ```
 
+## Deployment
+
+The site deploys to GitHub Pages automatically from the `main` branch via
+`.github/workflows/deploy.yml`. The workflow runs `npm ci`, `npm test`, and
+`npm run build`, then publishes `dist/`. `main` is branch-protected: every
+change lands through a pull request and the `build` check must pass before
+merge. There are no per-PR preview deployments — merging to `main` publishes
+production at https://jordilopez.github.io/css-grid-lanes/.
+
 ## Development
 
-Styling builds on [css-starter](https://github.com/jordilopez/css-starter),
-including its `.card` and `.picker` components (added in v0.3.0). During
-development the dependency points at the local clone
-(`file:../../sandboxes/css-starter`); once `v0.3.0` is pushed to GitHub it
-can be switched to `github:jordilopez/css-starter#v0.3.0`. Demo styles in
+Styling builds on [css-starter](https://github.com/jordilopez/css-starter)
+v0.3.0, using its `.card` and `.picker` components. The dependency is pinned
+to the public release tarball
+(`https://github.com/jordilopez/css-starter/archive/refs/tags/v0.3.0.tar.gz`)
+so the project installs in CI and for any contributor. Demo styles in
 `src/styles/demo.css` are unlayered and override the `css-starter.*`
 cascade layers by design.

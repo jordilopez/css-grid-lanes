@@ -45,7 +45,7 @@ that builds on every push to `main`.
 
 ### Phase 3: Publish with protected main
 - [x] Task 4: Create public repo, bootstrap `main`, enable branch protection
-- [ ] Task 5: Open PR for the Pages config/workflow changes; owner approves and merges; verify live site
+- [x] Task 5: Open PR for the Pages config/workflow changes; owner approves and merges; verify live site
 
 ### Phase 4: Polish
 - [ ] Task 6: README updates (live demo URL, deployment notes) via PR + final verification
