@@ -1,69 +1,70 @@
-# Implementation Plan: CSS Grid Lanes Demo
+# Implementation Plan: Publish css-grid-lanes to GitHub + GitHub Pages
 
 ## Overview
 
-A static Astro site demonstrating the new CSS Grid Lanes feature (`display: grid-lanes`,
-CSS Grid Level 3), supported today only in Safari (26.2+ / Safari Technology Preview 234+).
-The page shows a top disclaimer when the browser doesn't support the feature, then walks
-through progressive examples — basic waterfall gallery, lane spanning, brick layout,
-`flow-tolerance` — using dog photos from the dog.ceo API as content. Styles build on the
-`css-starter` design system (github:jordilopez/css-starter#0.2.1) via its cascade layers,
-overridden with unlayered demo styles.
+Publish the completed CSS Grid Lanes demo as a public GitHub repository
+(`jordilopez/css-grid-lanes`) and deploy the static Astro build to GitHub
+Pages. The site will be served at
+`https://jordilopez.github.io/css-grid-lanes/` via a GitHub Actions workflow
+that builds on every push to `main`.
 
 ## Architecture Decisions
 
-- **Astro (static output)** — zero-JS by default fits a static demo; component structure
-  maps cleanly to example sections; build-time fetch of dog.ceo images avoids runtime API
-  dependency.
-- **css-starter as a git dependency** (`github:jordilopez/css-starter#0.2.1`) — the npm
-  registry package is a stale 2022 v0.0.2; the GitHub tag has the layered design system.
-  Imported once in the base layout; all demo styles are unlayered so they always win over
-  `css-starter.*` layers (by design of css-starter).
-- **Feature detection for the disclaimer** — a small inline script uses
-  `CSS.supports('display', 'grid-lanes')` to show the Safari-only banner only when needed;
-  content still renders with a flexbox fallback in unsupported browsers.
-- **dog.ceo API at build time** — fetch a set of random/breed images in the Astro frontmatter
-  of each example; deterministic enough for a demo, no API keys.
-- **No CSS framework** — Grid Lanes is the star; demo CSS is hand-written on top of
-  css-starter tokens.
-
-## Supported Examples (from WebKit blog / CSS Grid 3 spec)
-
-1. **Basic waterfall** — `display: grid-lanes; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap`
-2. **Varying lane sizes** — alternating narrow/wide lanes via mixed `minmax()` repeat tracks
-3. **Spanning items** — `grid-column: span N` on featured cards
-4. **Explicit placement** — e.g. `grid-column: -3 / -1`
-5. **Brick layout** — lanes defined with `grid-template-rows`
-6. **Flow tolerance** — `flow-tolerance` slider-less demo (two side-by-side variants)
+- **Deploy via GitHub Actions** — builds in CI on push to `main`; no local build
+  artifacts (`dist/`) committed, no gh-pages branch juggling. Custom workflow:
+  `setup-node` (from `.nvmrc`) → `npm ci` → `npm test` → `npm run build` →
+  `actions/upload-pages-artifact` → `actions/deploy-pages`. Tests gate deploys.
+- **Project pages (not user pages)** — repo name dictates base path, so Astro
+  gets `site: 'https://jordilopez.github.io'` and
+  `base: '/css-grid-lanes'`.
+- **Switch `css-starter` to the GitHub tag first** — the current
+  `file:../../sandboxes/css-starter` dependency won't install for anyone else
+  (or in CI). `v0.3.0` is confirmed published at
+  `github:jordilopez/css-starter#v0.3.0`.
+- **Create the repo with `gh` CLI** — authenticated as `jordilopez` over SSH.
+- **Protected `main` + mandatory PRs** — after bootstrapping `main`, enable a
+  branch protection ruleset: require a pull request before merging, require at
+  least 1 approving review (the owner, `jordilopez`), dismiss stale approvals,
+  require conversation resolution, and block force-pushes/deletions. All
+  subsequent changes (including this plan's own tasks) land via feature branch
+  → PR → owner approval → merge. Direct pushes to `main` are rejected.
+- **Bootstrap exception** — the repository starts empty, so the existing local
+  `main` history is pushed once to create the branch; protection is enabled
+  immediately after. Every later change goes through a PR.
+- **README updates** — document the live demo URL and deployment flow.
 
 ## Task List
 
-### Phase 1: Foundation
-- [ ] Task 1: Scaffold Astro project with css-starter and dog.ceo utilities
+### Phase 1: Public-ready dependency
+- [x] Task 1: Switch css-starter dependency to GitHub tag and verify install/build
 
-### Phase 2: Page shell & core demo
-- [ ] Task 2: Base layout, header, disclaimer banner, fallback styles
-- [ ] Task 3: Hero + Example 1 (basic waterfall gallery with dog cards)
+### Phase 2: Pages deployment config
+- [x] Task 2: Astro site/base config for GitHub Pages
+- [x] Task 3: GitHub Actions deploy workflow
 
-### Phase 3: Advanced examples
-- [ ] Task 4: Examples 2–6 (varying lanes, spanning, placement, brick, flow-tolerance)
+### Phase 3: Publish with protected main
+- [ ] Task 4: Create public repo, bootstrap `main`, enable branch protection
+- [ ] Task 5: Open PR for the Pages config/workflow changes; owner approves and merges; verify live site
 
 ### Phase 4: Polish
-- [ ] Task 5: Resources/footer, accessibility pass, build verification
+- [ ] Task 6: README updates (live demo URL, deployment notes) via PR + final verification
 
 ### Checkpoint: Complete
-- [ ] `npm run build` succeeds; dist output serves statically
-- [ ] All examples render with fallback in Chrome/Firefox and with Grid Lanes in Safari
-- [ ] README updated with how to run and where to see the feature
+- [ ] Fresh `npm install && npm run build && npm test` passes from a clean clone
+- [ ] `main` is protected; direct push rejected, PR + owner approval required
+- [ ] Site live at https://jordilopez.github.io/css-grid-lanes/
+- [ ] Workflow green on GitHub Actions
 
 ## Risks and Mitigations
 
 | Risk | Impact | Mitigation |
 |------|--------|------------|
-| Git dependency install fails in sandboxed npm | Med | Fallback: `file:` dependency to the local sandbox clone |
-| dog.ceo API flaky at build time | Low | Catch fetch errors and fall back to a small set of placeholder gradient cards |
-| Syntax drift (e.g. `flow-tolerance` vs older `item-tolerance`) | Low | Follow the WebKit blog's updated names; document Safari TP version required |
-| Non-Safari visitors see broken layout | Med | Flexbox/multi-column fallback behind `@supports not (display: grid-lanes)` |
+| css-starter GitHub tag missing files that `file:` clone had | Med | Verify `npm run build && npm test` locally immediately after switching (Task 1 gates everything) |
+| Pages asset paths break without `base` config | Med | Set `site` + `base` before first deploy; verify built `index.html` references `/css-grid-lanes/...` |
+| Astro build needs Node version pinning in CI | Low | Use `withastro/action` which reads `.nvmrc` |
+| Repo name collision on GitHub | Low | Check with `gh repo view` before creating; pick alternative name if taken |
+| Branch protection blocks the deploy workflow or first push | Med | Bootstrap `main` before enabling protection; deploy workflow only needs to publish artifacts, not push to `main` |
+| Owner cannot approve own PR (GitHub forbids self-approval) | Med | If GitHub refuses self-approval, use the ruleset's "require approval" with the owner as bypass actor; confirm the exact setting during Task 4 |
 
 ## Open Questions
-- None — design latitude granted by user.
+- None — repo name assumed `css-grid-lanes` under `jordilopez`.

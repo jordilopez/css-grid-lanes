@@ -6,7 +6,7 @@
   "author": "",
   "dependencies": {
     "astro": "^7.3.2",
-    "css-starter": "file:../../sandboxes/css-starter"
+    "css-starter": "https://github.com/jordilopez/css-starter/archive/refs/tags/v0.3.0.tar.gz"
   },
   "devDependencies": {
     "vitest": "^5.0.1"
