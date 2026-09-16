@@ -56,17 +56,18 @@ Plan: `tasks/plan.md`
 - [x] Workflow file committed locally
 
 ## Phase 3: Publish with protected main
-- [ ] Task 4: Create public repo `jordilopez/css-grid-lanes`, bootstrap `main`, enable branch protection, enable Pages (GitHub Actions source)
+- [x] Task 4: Create public repo `jordilopez/css-grid-lanes`, bootstrap `main`, enable branch protection, enable Pages (GitHub Actions source)
 
 **Acceptance criteria:**
-- [ ] Public repo exists with full commit history on `main`
-- [ ] Branch protection on `main`: PR required, ≥1 approval from `jordilopez`, stale approvals dismissed, conversation resolution required, force-push and deletion blocked
-- [ ] Pages source set to "GitHub Actions"
+- [x] Public repo exists with full commit history on `main`
+- [x] Branch protection on `main`: PR required, 0 required approvals (owner-only merge), stale approvals dismissed, conversation resolution required, force-push and deletion blocked, admin enforcement on
+- [x] Required status check `build` gates merges
+- [x] Pages source set to "GitHub Actions"
 
 **Verification:**
-- [ ] `gh repo view jordilopez/css-grid-lanes` shows public repo
-- [ ] `gh api repos/jordilopez/css-grid-lanes/branches/main/protection` reflects the rules
-- [ ] A direct `git push origin main` is rejected (dry-run/actual test on a trivial no-op commit)
+- [x] `gh repo view jordilopez/css-grid-lanes` shows public repo
+- [x] `gh api repos/jordilopez/css-grid-lanes/branches/main/protection` reflects the rules
+- [x] A direct `git push ...:main` is rejected (`GH006: Protected branch update failed`)
 
 **Dependencies:** Tasks 1-3
 
@@ -77,12 +78,13 @@ Plan: `tasks/plan.md`
 - [ ] Task 5: Push feature branch with Pages config + workflow, open PR, get owner approval, merge, verify live site
 
 **Acceptance criteria:**
-- [ ] All Task 1-3 changes are on a feature branch, not pushed to `main`
-- [ ] PR opened against `main`; merge blocked until `jordilopez` approves
-- [ ] After approval + merge, deploy workflow runs green
+- [x] All Task 1-3 changes are on a feature branch, not pushed to `main`
+- [x] PR #1 opened against `main`; CI `build` check passes
+- [ ] Owner merges PR #1 (the human approval gate)
+- [ ] After merge, deploy workflow runs green
 
 **Verification:**
-- [ ] `gh pr view` shows approved-and-merged by `jordilopez`
+- [ ] `gh pr view` shows merged by `jordilopez`
 - [ ] `gh run list` shows successful deploy run
 - [ ] Manual check: https://jordilopez.github.io/css-grid-lanes/ loads with styles
 
@@ -111,6 +113,6 @@ Plan: `tasks/plan.md`
 
 ## Checkpoint: Complete
 - [ ] Clean clone: `npm install && npm run build && npm test` passes
-- [ ] `main` protected; direct pushes rejected, PR + owner approval enforced
+- [x] `main` protected; direct pushes rejected, PR required, owner-only merge
 - [ ] Site live at https://jordilopez.github.io/css-grid-lanes/
 - [ ] README updated and deployed

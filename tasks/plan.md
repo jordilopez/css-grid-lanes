@@ -22,12 +22,13 @@ that builds on every push to `main`.
   (or in CI). `v0.3.0` is confirmed published at
   `github:jordilopez/css-starter#v0.3.0`.
 - **Create the repo with `gh` CLI** — authenticated as `jordilopez` over SSH.
-- **Protected `main` + mandatory PRs** — after bootstrapping `main`, enable a
-  branch protection ruleset: require a pull request before merging, require at
-  least 1 approving review (the owner, `jordilopez`), dismiss stale approvals,
-  require conversation resolution, and block force-pushes/deletions. All
-  subsequent changes (including this plan's own tasks) land via feature branch
-  → PR → owner approval → merge. Direct pushes to `main` are rejected.
+- **Protected `main` + mandatory PRs** — `main` requires a pull request before
+  merging, blocks direct pushes/force-pushes/deletions, requires conversation
+  resolution, requires the `build` status check, and enforces the rules on
+  admins. GitHub forbids self-approval and `jordilopez` is the only account, so
+  the approving-review count is **0**; the owner remains the sole merge gate by
+  virtue of being the only write/admin user. Every change lands via feature
+  branch → PR → owner merges.
 - **Bootstrap exception** — the repository starts empty, so the existing local
   `main` history is pushed once to create the branch; protection is enabled
   immediately after. Every later change goes through a PR.
@@ -43,7 +44,7 @@ that builds on every push to `main`.
 - [x] Task 3: GitHub Actions deploy workflow
 
 ### Phase 3: Publish with protected main
-- [ ] Task 4: Create public repo, bootstrap `main`, enable branch protection
+- [x] Task 4: Create public repo, bootstrap `main`, enable branch protection
 - [ ] Task 5: Open PR for the Pages config/workflow changes; owner approves and merges; verify live site
 
 ### Phase 4: Polish
