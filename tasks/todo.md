@@ -115,4 +115,4 @@ Plan: `tasks/plan.md`
 - [x] Clean clone: `npm install && npm run build && npm test` passes
 - [x] `main` protected; direct pushes rejected, PR required, owner-only merge
 - [x] Site live at https://jordilopez.github.io/css-grid-lanes/
-- [ ] README updated and deployed
+- [x] README updated and deployed

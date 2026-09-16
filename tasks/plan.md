@@ -48,13 +48,13 @@ that builds on every push to `main`.
 - [x] Task 5: Open PR for the Pages config/workflow changes; owner approves and merges; verify live site
 
 ### Phase 4: Polish
-- [ ] Task 6: README updates (live demo URL, deployment notes) via PR + final verification
+- [x] Task 6: README updates (live demo URL, deployment notes) via PR + final verification
 
 ### Checkpoint: Complete
-- [ ] Fresh `npm install && npm run build && npm test` passes from a clean clone
-- [ ] `main` is protected; direct push rejected, PR + owner approval required
-- [ ] Site live at https://jordilopez.github.io/css-grid-lanes/
-- [ ] Workflow green on GitHub Actions
+- [x] Fresh `npm install && npm run build && npm test` passes from a clean clone
+- [x] `main` is protected; direct push rejected, PR required, owner-only merge
+- [x] Site live at https://jordilopez.github.io/css-grid-lanes/
+- [x] Workflow green on GitHub Actions
 
 ## Risks and Mitigations
 
