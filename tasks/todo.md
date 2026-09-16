@@ -75,18 +75,18 @@ Plan: `tasks/plan.md`
 
 **Estimated scope:** Small (remote operations only)
 
-- [ ] Task 5: Push feature branch with Pages config + workflow, open PR, get owner approval, merge, verify live site
+- [x] Task 5: Push feature branch with Pages config + workflow, open PR, get owner approval, merge, verify live site
 
 **Acceptance criteria:**
 - [x] All Task 1-3 changes are on a feature branch, not pushed to `main`
 - [x] PR #1 opened against `main`; CI `build` check passes
-- [ ] Owner merges PR #1 (the human approval gate)
-- [ ] After merge, deploy workflow runs green
+- [x] Owner merges PR #1 (the human approval gate)
+- [x] After merge, deploy workflow runs green
 
 **Verification:**
-- [ ] `gh pr view` shows merged by `jordilopez`
-- [ ] `gh run list` shows successful deploy run
-- [ ] Manual check: https://jordilopez.github.io/css-grid-lanes/ loads with styles
+- [x] `gh pr view` shows merged by `jordilopez`
+- [x] `gh run list` shows successful deploy run
+- [x] Manual check: https://jordilopez.github.io/css-grid-lanes/ loads with styles
 
 **Dependencies:** Task 4
 
@@ -95,11 +95,11 @@ Plan: `tasks/plan.md`
 **Estimated scope:** Small (remote operations only)
 
 ## Phase 4: Polish
-- [ ] Task 6: Update README with live demo URL and deployment notes via PR
+- [x] Task 6: Update README with live demo URL and deployment notes via PR
 
 **Acceptance criteria:**
-- [ ] README links to the live Pages URL
-- [ ] Deployment workflow and protected-branch flow documented briefly
+- [x] README links to the live Pages URL
+- [x] Deployment workflow and protected-branch flow documented briefly
 - [ ] Change delivered through a PR approved by `jordilopez`
 
 **Verification:**
@@ -112,7 +112,7 @@ Plan: `tasks/plan.md`
 **Estimated scope:** Small (1 file)
 
 ## Checkpoint: Complete
-- [ ] Clean clone: `npm install && npm run build && npm test` passes
+- [x] Clean clone: `npm install && npm run build && npm test` passes
 - [x] `main` protected; direct pushes rejected, PR required, owner-only merge
-- [ ] Site live at https://jordilopez.github.io/css-grid-lanes/
+- [x] Site live at https://jordilopez.github.io/css-grid-lanes/
 - [ ] README updated and deployed
