@@ -37,17 +37,6 @@ body {
   margin: 0;
 }
 
-/* --- unsupported-browser notice --- */
-
-.lanes-notice {
-  margin-block: var(--sp-4, 1.5rem);
-  padding: var(--sp-3, 1rem) var(--sp-4, 1.5rem);
-  border: 1px solid var(--c-warning, #b8860b);
-  border-radius: var(--br-md, 8px);
-  background: rgba(184, 134, 11, 0.08);
-  color: var(--c-text);
-}
-
 /* --- shared example sections --- */
 
 .site-main > section {
