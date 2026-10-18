@@ -2,6 +2,14 @@
    Demo styles — deliberately unlayered so they win over css-starter.* layers
    ========================================================================== */
 
+/* css-starter's `.callout` sets `display: flex`, which beats the UA
+   stylesheet's `[hidden] { display: none }`. The notice is the only element
+   that combines `callout` with `hidden`, so this selector (specificity
+   0,2,0) restores the hidden-equivalent without !important. */
+.callout[hidden] {
+  display: none;
+}
+
 body {
   font-family: var(--ff-sans);
   color: var(--c-text);
@@ -35,17 +43,6 @@ body {
 .site-header__desc {
   color: var(--c-text-secondary);
   margin: 0;
-}
-
-/* --- unsupported-browser notice --- */
-
-.lanes-notice {
-  margin-block: var(--sp-4, 1.5rem);
-  padding: var(--sp-3, 1rem) var(--sp-4, 1.5rem);
-  border: 1px solid var(--c-warning, #b8860b);
-  border-radius: var(--br-md, 8px);
-  background: rgba(184, 134, 11, 0.08);
-  color: var(--c-text);
 }
 
 /* --- shared example sections --- */

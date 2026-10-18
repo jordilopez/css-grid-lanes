@@ -34,11 +34,22 @@ const { title, description = 'A demo of the CSS Grid Lanes feature, only support
       <p class="site-header__desc">{description}</p>
     </header>
 
-    <div id="lanes-notice" class="lanes-notice" role="status" hidden>
-      <strong>⚠️ Safari only.</strong> CSS Grid Lanes
-      (<code>display: grid-lanes</code>) is currently only supported in
-      <a href="https://caniuse.com/css-grid-lanes">Safari 26.2+ and Safari Technology Preview</a>.
-      You're seeing a fallback layout — open this page in Safari to see the real thing.
+    <div id="lanes-notice" class="callout callout--warning" role="status" hidden>
+      <span class="callout__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4.5 21h15a2 2 0 0 0 1.73-3Z" />
+          <path d="M12 9v4M12 17h.01" />
+        </svg>
+      </span>
+      <div class="callout__content">
+        <p class="callout__title">Safari only.</p>
+        <p class="callout__body">
+          CSS Grid Lanes (<code>display: grid-lanes</code>) is currently only
+          supported in
+          <a href="https://caniuse.com/css-grid-lanes">Safari 26.2+ and Safari Technology Preview</a>.
+          You're seeing a fallback layout — open this page in Safari to see the real thing.
+        </p>
+      </div>
     </div>
 
     <main class="site-main">
